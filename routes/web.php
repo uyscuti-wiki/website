@@ -40,6 +40,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Spatie\Honeypot\ProtectAgainstSpam;
+use App\Livewire\Counter;
 
 if (env('APP_ENV') === 'production') {
     \URL::forceScheme('https');
@@ -51,6 +52,7 @@ if (version_compare(PHP_VERSION, '7.2.0', '>=')) {
 
 Route::prefix(LaravelLocalization::setLocale())->middleware('localeSessionRedirect', 'localizationRedirect', 'localeViewPath')->group(function () {
 
+    Route::get('/counter', Counter::class);
     Route::get('login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
     Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallback']);
 
